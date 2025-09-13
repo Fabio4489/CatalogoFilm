@@ -24,11 +24,5 @@ public class Film {
     public String getTitolo() { return titolo; }
     public String getRegista() { return regista; }
     public int getAnno() { return anno; }
-<<<<<<< HEAD
     public String getGenere() { return genere; }
 }
-=======
-    public String getGenere() { return genere; }
-}
-
->>>>>>> 12deb95be97ab991e89dae4d303a235b8926674a
