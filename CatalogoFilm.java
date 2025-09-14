@@ -16,12 +16,12 @@ public class CatalogoFilm {
             .findFirst();
     }
 
-    public void addFilm(Film film){
+    public boolean addFilm(Film film){
         if (findOne(film.getId()).isPresent()) {
-            System.out.println("Errore, nell'id");
+            return false;
         }
         catalogo.add(film);
-        System.out.println( "ok");
+        return true;
     }
         // VECCHIO CODICE PER AGGIUNGERE, (senza l'uso dei metodi)
         // boolean trovato = false;
@@ -36,10 +36,14 @@ public class CatalogoFilm {
         //     System.out.println( "ok");    
         // }
 
-    public void printCatalogo(){
-        System.out.println("________________________________________________________________________________________________________________");
-        System.out.println(" Film | Titolo | Genere | Regista | Anno |");
-        catalogo.forEach(f -> System.out.println(" - "+f.getId()+" | "+f.getTitolo()+"         | "+f.getGenere()+"         | "+f.getRegista()+"        | "+f.getAnno()+"       |"));;
+    public String printCatalogo(){
+        if(catalogo.size() == 0){
+            return "|     Catalogo vuoto      |";
+        }else{
+            StringBuilder sb = new StringBuilder("|-------------------------|\n");
+            catalogo.forEach(f -> sb.append("| Id.         "+f.getId()+"\n| Titolo.     "+f.getTitolo()+"\n| Genere.     "+f.getGenere()+"\n| Regista.    "+f.getRegista()+"\n| Anno.       "+f.getAnno() + "\n|-------------------------|\n"));;
+            return sb.toString();
+        }
     }
         // VECCHIO CODICE PER PRINTARE, (senza l'uso dei metodi)
         // System.out.println("   Film  |          Titolo           |  Genere  |    Regista    | Anno |");
@@ -47,24 +51,18 @@ public class CatalogoFilm {
         //     System.out.println("  -  "+f.getId()+"   | "+f.getTitolo()+" | "+f.getGenere()+" | "+f.getRegista()+" | "+f.getAnno()+" |");
         // }
     
-    public void deleteFilm(int id){
-        boolean removed = catalogo.removeIf(f -> f.getId() == id);
-        if (removed) {
-            System.out.println("ok");
-        } else {
-            System.out.println("Id non presente");
-        }
+    public boolean deleteFilm(int id){
+        return catalogo.removeIf(f -> f.getId() == id);
     }
 
-    public String modificaFilm(int id, Film film){
+    public boolean modificaFilm(int id, Film film){
         return findOne(id).map(f -> {
             f.setTitolo(film.getTitolo());
             f.setGenere(film.getGenere());
             f.setRegista(film.getRegista());
             f.setAnno(film.getAnno());
-            return ("Aggiornamnto ok");
-        }).orElseThrow(() -> new NoSuchElementException("Errore nell'aggiornamento"));
-        
+            return true;
+        }).orElse(false);
     }
 
     public void findOneByGenere(String genere) {
