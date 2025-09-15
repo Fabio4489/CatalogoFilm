@@ -32,8 +32,7 @@ public class Main {
                     break;
                 case "3":
                     // ricerca per genere
-                    // Implementazione futura
-
+                    System.out.println(ricerca(scan, c));
                     break;
                 case "4":
                     // modifica
@@ -83,7 +82,7 @@ public class Main {
         System.out.println("| 4. Modifica un Film     |");
         System.out.println("| 5. Elimina un Film      |");
         System.out.println("| 6. Esci                 |");
-        System.out.print("|-------------------------|");
+        System.out.print("|-------------------------|       --> ");
     }
 
 
@@ -100,7 +99,7 @@ public class Main {
         String Regista = scan.nextLine();
         System.out.print("| Inserisci Anno uscita   | ");
         String AnnoStringa = scan.next();
-        System.out.println("|-------------------------|");
+        System.out.println("|-------------------------|       --> ");
 
         int AnnoInt = Integer.parseInt(AnnoStringa);
         Film f = new Film(contatore, Titolo, Regista, AnnoInt, Genere);
@@ -109,7 +108,7 @@ public class Main {
 
     public static String stampa(CatalogoFilm c){
         System.out.println("\n|-------------------------|");
-        System.out.println("| 2. Visualizza i Film    |");
+        System.out.println("| 2. Lista Film           |");
         System.out.println("|-------------------------|");
         return c.printCatalogo();
     }
@@ -125,12 +124,14 @@ public class Main {
         scan.nextLine();
         
         int idInt = Integer.parseInt(idStringa);
+        System.out.println("-- > INSERIRE (invio) PER NON MODIFICARE < --");
         System.out.print("| Inserisci Titolo        |");
         String Titolo = scan.nextLine();
         System.out.print("| Inserisci Genere        |");
         String Genere = scan.nextLine();
         System.out.print("| Inserisci Regista       |");
         String Regista = scan.nextLine();
+        System.out.println("-- > INSERIRE (0) PER NON MODIFICARE < --");
         System.out.print("| Inserisci Anno uscita   |");
         String AnnoStringa = scan.next();
         System.out.println("|-------------------------|");
@@ -151,7 +152,19 @@ public class Main {
 
         int idInt = Integer.parseInt(idStringa);
         return c.deleteFilm(idInt);
+    }
 
+    public static String ricerca(Scanner scan, CatalogoFilm c){
+        
+        scan.nextLine();
+        
+        System.out.println("\n|-------------------------|");
+        System.out.println("| 3. Lista Film           |");
+        System.out.println("|-------------------------|");
+        System.out.print("| Inserisci genere        |");
+        String Genere = scan.nextLine();
+        
+        return c.findOneByGenere(Genere);
     }
 }
 

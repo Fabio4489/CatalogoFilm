@@ -38,7 +38,7 @@ public class CatalogoFilm {
 
     public String printCatalogo(){
         if(catalogo.size() == 0){
-            return "|     Catalogo vuoto      |";
+            return "|     Catalogo vuoto      |\n|-------------------------|\n";
         }else{
             StringBuilder sb = new StringBuilder("|-------------------------|\n");
             catalogo.forEach(f -> sb.append("| Id.         "+f.getId()+"\n| Titolo.     "+f.getTitolo()+"\n| Genere.     "+f.getGenere()+"\n| Regista.    "+f.getRegista()+"\n| Anno.       "+f.getAnno() + "\n|-------------------------|\n"));;
@@ -57,17 +57,27 @@ public class CatalogoFilm {
 
     public boolean modificaFilm(int id, Film film){
         return findOne(id).map(f -> {
-            f.setTitolo(film.getTitolo());
-            f.setGenere(film.getGenere());
-            f.setRegista(film.getRegista());
-            f.setAnno(film.getAnno());
+            if(!film.getTitolo().isEmpty()){
+                f.setTitolo(film.getTitolo());
+            }
+            if(!film.getGenere().isEmpty()){
+                f.setGenere(film.getGenere());
+            }
+            if(!film.getRegista().isEmpty()){
+                f.setRegista(film.getRegista());
+            }
+            if(film.getAnno() != 0){
+                f.setAnno(film.getAnno());
+            }
             return true;
         }).orElse(false);
     }
 
-    public void findOneByGenere(String genere) {
-    catalogo.stream()
-                   .filter(f -> Objects.equals(genere, f.getGenere()))
-                   .forEach(f -> System.out.println(" - "+f.getId()+" | "+f.getTitolo()+"         | "+f.getGenere()+"         | "+f.getRegista()+"        | "+f.getAnno()+"       |"));
+    public String findOneByGenere(String genere) {
+        StringBuilder sb = new StringBuilder("|-------------------------|\n");
+        catalogo.stream()
+                    .filter(f -> Objects.equals(genere, f.getGenere()))
+                    .forEach(f -> sb.append("| Id.         "+f.getId()+"\n| Titolo.     "+f.getTitolo()+"\n| Genere.     "+f.getGenere()+"\n| Regista.    "+f.getRegista()+"\n| Anno.       "+f.getAnno() + "\n|-------------------------|\n"));;
+        return sb.toString();
     }
 }
