@@ -1,9 +1,9 @@
 public class Film {
-    int id;
-    String titolo;
-    String regista;
-    int anno;
-    String genere;
+    private int id;
+    private String titolo;
+    private String regista;
+    private int anno;
+    private String genere;
 
     public Film(){}
     public Film(int id, String titolo, String regista, int anno, String genere){
