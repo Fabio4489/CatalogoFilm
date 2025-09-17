@@ -1,3 +1,5 @@
+package com.example.CatalogoFilm.model;
+
 public class Film {
     private int id;
     private String titolo;
@@ -24,5 +26,5 @@ public class Film {
     public String getTitolo() { return titolo; }
     public String getRegista() { return regista; }
     public int getAnno() { return anno; }
-    public String getGenere() { return genere; }
+    public String getGenere() { return genere; }
 }
