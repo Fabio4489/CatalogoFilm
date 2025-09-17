@@ -19,7 +19,11 @@ public class CatalogoFilmService {
     public List<Film> trovaTuttiFilm() {
         return catalogo.getAllFilm();
     }
-
+    
+    public List<Film> trovaPerGenere(String genere) {
+        return catalogo.getByGender(genere);
+    }
+    
     // ricerca per ID
     public Optional<Film> trovaConId(int id) {
         return catalogo.getById(id);

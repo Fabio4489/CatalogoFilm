@@ -25,23 +25,32 @@ import java.net.URI;
     }
 
     // GET id specifico
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Film> getById(@PathVariable int id) {
         return service.trovaConId(id)
                       .map(ResponseEntity::ok)
                       .orElse(ResponseEntity.notFound().build());
-        }   
-
+    }
+    
+    // GET per genere
+    @GetMapping("/ricerca/{genere}")
+    public ResponseEntity<List<Film>> getByGenere(@PathVariable String genere) {
+        List<Film> films = service.trovaPerGenere(genere);
+        if (films.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(films);
+    }
+    
     // POST
     @PostMapping
     public ResponseEntity<Film> create(@RequestBody Film body) {
         Film risultatoInserimento = service.aggiungiFilm(body);
         if(risultatoInserimento == null){
             return ResponseEntity.badRequest().build();
-        }else{
-            return ResponseEntity.created(URI.create("/film/"+risultatoInserimento.getId()))
-                                  .body(risultatoInserimento);
         }
+        return ResponseEntity.created(URI.create("/film/"+risultatoInserimento.getId()))
+                                .body(risultatoInserimento);
     } 
 
     // PUT
