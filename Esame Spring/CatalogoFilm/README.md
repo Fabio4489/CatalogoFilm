@@ -1,12 +1,20 @@
 # Applicazione java per i film
-## Creata la classe Film per il catalogo
+## PRIMO COMMIT:
 
-  In questo commit ho aggiunto il file Film.java e definito la classe Film.
+In questo commit abbiamo aggiunto il file Film.java e definendo la classe Film.
+
 La classe contiene:
 
-- gli attributi principali che descrivono un film (come titolo, anno, regista, ecc.);
+- Gli attributi principali che descrivono un film ( Id, Titolo, Anno, Regista, Genere);
 
-- i metodi getter e setter per accedere e modificare i valori degli attributi;
+- I metodi getter e setter per accedere e modificare i valori degli attributi;
 
-- i costruttori, sia quello vuoto sia quello parametrizzato, per creare oggetti Film in modi diversi.
+- I costruttori, sia quello vuoto sia quello parametrizzato, per creare oggetti Film in modi diversi.
 
+## SECONDO COMMIT:
+In questo secondo commit abbiamo creato il file CatalogoFilm.java che contiene la classe CatalogoFilm.
+
+Questa classe contiene:
+  - L'`array` che conterrà tutti i film;
+  - Un contatore che gestirà gli Id;
+  - I metodi `getAllFilm()`, `addFilm()`, `removeFilm()`, `getById()`. Questi metoci ci permetteranno di interagire con l'array.
